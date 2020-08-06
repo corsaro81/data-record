@@ -12,6 +12,15 @@ namespace System
 
         public static TDataRecord With<TDataRecord>(this TDataRecord dataRecord, object changes)
         {
+            if(dataRecord is null)
+            {
+                throw new ArgumentNullException(nameof(dataRecord));
+            }
+            if(changes is null)
+            {
+                throw new ArgumentNullException(nameof(changes));
+            }
+
             var instance = dataRecord.DeepClone();
 
             var properties = changes.GetType().GetProperties(bindingFlags);
